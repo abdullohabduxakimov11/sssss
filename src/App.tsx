@@ -48,6 +48,8 @@ import {
   FaWhatsapp as Whatsapp, 
   FaLinkedin as Linkedin,
   FaFacebook as Facebook,
+  FaTwitter as Twitter,
+  FaGithub as Github,
   FaAmazon,
   FaMicrosoft
 } from "react-icons/fa6";
@@ -1963,21 +1965,26 @@ const Footer = ({ setCurrentPage, onLegalClick }: { setCurrentPage: (page: strin
               {t.footer.desc}
             </motion.p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               {[
-                { icon: Whatsapp, href: "#", label: "WhatsApp" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Facebook, href: "#", label: "Facebook" }
+                { icon: Whatsapp, href: "https://wa.me/", label: "WhatsApp" },
+                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+                { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+                { icon: Twitter, href: "https://twitter.com", label: "X (Twitter)" },
+                { icon: Github, href: "https://github.com", label: "GitHub" }
               ].map((social, i) => (
                 <motion.a
                   key={i}
                   href={social.href}
-                  whileHover={{ y: -5, scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-brand-teal hover:border-brand-teal/50 hover:bg-brand-teal/10 transition-all duration-300 group"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -6, scale: 1.15 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-full bg-white/5 border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-brand-teal/50 hover:bg-brand-teal/10 transition-all duration-300 group"
                   aria-label={social.label}
+                  title={social.label}
                 >
-                  <social.icon className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
+                  <social.icon className="w-5 h-5 group-hover:drop-shadow-[0_0_12px_rgba(45,212,191,0.6)]" />
                 </motion.a>
               ))}
             </div>

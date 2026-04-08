@@ -88,7 +88,38 @@ if (process.env.NODE_ENV !== "production") {
       server: { middlewareMode: true },
       appType: "spa",
     });
+    
+    // Use Vite middleware first for assets and HMR
     app.use(vite.middlewares);
+    
+    // API routes (if any)
+    // Add your API routes here before the SPA fallback
+    
+    // SPA fallback - serve index.html for all other routes
+    app.use("*", async (req, res) => {
+      try {
+        const html = await vite.transformIndexHtml(
+          req.originalUrl,
+          `<!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Desknet</title>
+            </head>
+            <body>
+              <div id="root"></div>
+              <script type="module" src="/src/main.tsx"><\/script>
+            </body>
+          </html>`
+        );
+        res.status(200).set({ "Content-Type": "text/html" }).end(html);
+      } catch (e) {
+        console.error("Error transforming HTML:", e);
+        res.status(500).end("Error loading app");
+      }
+    });
     
     const PORT = 3000;
     httpServer.listen(PORT, "0.0.0.0", () => {

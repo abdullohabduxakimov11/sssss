@@ -1,17 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-@import "tailwindcss";
 
 @theme {
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --color-brand-teal: #2dd4bf;
   --color-brand-dark: #000000;
   --color-brand-card: #0a0f1a;
-  --font-weight-normal: 300;
-  --font-weight-medium: 400;
-  --font-weight-semibold: 500;
-  --font-weight-bold: 600;
-  --font-weight-extrabold: 700;
-  --font-weight-black: 800;
   --shadow-glow: 0 0 20px rgba(45, 212, 191, 0.4);
   --shadow-glow-strong: 0 0 35px rgba(45, 212, 191, 0.6);
 }
