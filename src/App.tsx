@@ -1967,11 +1967,11 @@ const Footer = ({ setCurrentPage, onLegalClick }: { setCurrentPage: (page: strin
 
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: Whatsapp, href: "https://wa.me/", label: "WhatsApp", color: "hover:from-emerald-500 hover:to-teal-500" },
-                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn", color: "hover:from-blue-500 hover:to-blue-600" },
-                { icon: Facebook, href: "https://facebook.com", label: "Facebook", color: "hover:from-blue-600 hover:to-blue-700" },
-                { icon: Twitter, href: "https://twitter.com", label: "X (Twitter)", color: "hover:from-slate-600 hover:to-slate-700" },
-                { icon: Github, href: "https://github.com", label: "GitHub", color: "hover:from-slate-500 hover:to-slate-700" }
+                { icon: Whatsapp, href: "https://wa.me/", label: "WhatsApp" },
+                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+                { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+                { icon: Twitter, href: "https://twitter.com", label: "X (Twitter)" },
+                { icon: Github, href: "https://github.com", label: "GitHub" }
               ].map((social, i) => (
                 <motion.a
                   key={i}
@@ -1980,12 +1980,11 @@ const Footer = ({ setCurrentPage, onLegalClick }: { setCurrentPage: (page: strin
                   rel="noopener noreferrer"
                   whileHover={{ y: -6, scale: 1.15 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-white/20 flex items-center justify-center text-white/60 transition-all duration-300 group relative overflow-hidden ${social.color}`}
+                  className="w-12 h-12 rounded-full bg-white/5 border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-brand-teal/50 hover:bg-brand-teal/10 transition-all duration-300 group"
                   aria-label={social.label}
                   title={social.label}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                  <social.icon className="w-5 h-5 relative z-10 group-hover:drop-shadow-[0_0_12px_rgba(45,212,191,0.6)] group-hover:text-white transition-all duration-300" />
+                  <social.icon className="w-5 h-5 group-hover:drop-shadow-[0_0_12px_rgba(45,212,191,0.6)]" />
                 </motion.a>
               ))}
             </div>
