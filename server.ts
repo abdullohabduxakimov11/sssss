@@ -88,13 +88,19 @@ if (process.env.NODE_ENV !== "production") {
       server: { middlewareMode: true },
       appType: "spa",
     });
+    
+    // Use Vite middleware first for assets and HMR
     app.use(vite.middlewares);
     
-    // SPA fallback - serve index.html for all non-API routes
-    app.get("*", (req, res, next) => {
-      if (!req.url.startsWith('/api')) {
-        vite.transformIndexHtml(req.url, `
-          <!doctype html>
+    // API routes (if any)
+    // Add your API routes here before the SPA fallback
+    
+    // SPA fallback - serve index.html for all other routes
+    app.use("*", async (req, res) => {
+      try {
+        const html = await vite.transformIndexHtml(
+          req.originalUrl,
+          `<!doctype html>
           <html lang="en">
             <head>
               <meta charset="UTF-8" />
@@ -104,12 +110,14 @@ if (process.env.NODE_ENV !== "production") {
             </head>
             <body>
               <div id="root"></div>
-              <script type="module" src="/src/main.tsx"></script>
+              <script type="module" src="/src/main.tsx"><\/script>
             </body>
-          </html>
-        `).then(html => res.end(html));
-      } else {
-        next();
+          </html>`
+        );
+        res.status(200).set({ "Content-Type": "text/html" }).end(html);
+      } catch (e) {
+        console.error("Error transforming HTML:", e);
+        res.status(500).end("Error loading app");
       }
     });
     
